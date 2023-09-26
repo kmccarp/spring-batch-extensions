@@ -48,9 +48,9 @@ public abstract class AbstractExcelItemReader<T> extends AbstractItemCountingIte
 
 	private Resource resource;
 
-	private int linesToSkip = 0;
+	private int linesToSkip;
 
-	private int currentSheet = 0;
+	private int currentSheet;
 
 	private int endAfterBlankLines = 1;
 
@@ -58,7 +58,7 @@ public abstract class AbstractExcelItemReader<T> extends AbstractItemCountingIte
 
 	private RowCallbackHandler skippedRowsCallback;
 
-	private boolean noInput = false;
+	private boolean noInput;
 
 	private boolean strict = true;
 
@@ -68,7 +68,7 @@ public abstract class AbstractExcelItemReader<T> extends AbstractItemCountingIte
 
 	private String password;
 
-	private boolean datesAsIso = false;
+	private boolean datesAsIso;
 
 	private Locale userLocale;
 
@@ -133,7 +133,7 @@ public abstract class AbstractExcelItemReader<T> extends AbstractItemCountingIte
 	@Override
 	protected void jumpToItem(final int itemIndex) {
 		RowMapper<T> current = this.rowMapper;
-		this.rowMapper = (rs) -> null;
+		this.rowMapper = rs -> null;
 		try {
 			for (int i = 0; i < itemIndex; i++) {
 				doRead();
